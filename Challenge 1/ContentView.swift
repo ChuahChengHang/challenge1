@@ -10,8 +10,26 @@ import SwiftUI
 struct ContentView: View {
     @State private var changeView: Int = 0
     @State private var goToQuestions: Bool = false
-    @State private var randomNumber: Int = 0
+    @Binding var changeViews: Int
     var body: some View {
+        if changeViews == 3 {
+            ScrollView {
+                HStack {
+                    Image("bookImage")
+                    Text("Story Time")
+                        .font(.largeTitle)
+                }
+                Text("Chapter 3:")
+                    .bold()
+                    .padding(.trailing, 275)
+                    .padding(.bottom, -20)
+                Text("James and Tristan followed Sean to a school. In the classroom, there is a little boy and his teacher.\n\nSean: This is my neighbour’s son, Xiao Weiyue. He’s at work, so I’m here at the parent-teacher meeting in his place. The problem is, his teacher, Ms. Cai, and I don’t fully understand what I’m telling her. Can you help?")
+                    .padding()
+            }
+            .onAppear() {
+                changeView = 4
+            }
+        }
         if changeView == 0 {
             VStack {
                 Text("DISCOVERING SINGLISH")
@@ -28,29 +46,29 @@ struct ContentView: View {
                 }
             }
         }else if changeView == 1 {
-                ScrollView {
-                    HStack {
-                        Image("bookImage")
-                        Text("Story Time")
-                            .font(.largeTitle)
-                    }
-                    Text("Introduction:")
-                        .bold()
-                        .padding(.trailing, 266)
-                        .padding(.bottom, -20)
-                    Text("Once upon a time, there were two very, very, very good friends called Tristan and James.\n\nJames: Where do you want to go for our next outing, Tristan?\n\nTristan: We have gone to every cafe and cinema in Singapore! I want to experience something new with you.\n\nAnd so, after robbing POSB Bank, James bought a time machine.\n\nJames: With a machine like this, we can even travel to the future!\n\nSo they stepped in. However, all of a sudden, the lights started flickering. An evil voice echoed  around them. It was… ChatGPFlower!\n\nChatGPFlower: Hahahaha, foolish humans. Now that I have my hands on your technology, I will hack it for myself. You will never return to the present!\n\nTristan: Oh no, James! Save me!!\n\nTristan falls into a black hole.\n\nJames: I’m coming for you!!\n\nJames jumps into the hole.")
-                        .padding()
-                    Button {
-                        changeView = 2
-                    }label: {
-                        RoundedRectangle(cornerRadius: 10)
-                            .frame(width: 370, height: 50)
-                            .overlay(
-                                Text("Next")
-                                    .foregroundStyle(.white)
-                            )
-                    }
+            ScrollView {
+                HStack {
+                    Image("bookImage")
+                    Text("Story Time")
+                        .font(.largeTitle)
                 }
+                Text("Introduction:")
+                    .bold()
+                    .padding(.trailing, 266)
+                    .padding(.bottom, -20)
+                Text("Once upon a time, there were two very, very, very good friends called Tristan and James.\n\nJames: Where do you want to go for our next outing, Tristan?\n\nTristan: We have gone to every cafe and cinema in Singapore! I want to experience something new with you.\n\nAnd so, after robbing POSB Bank, James bought a time machine.\n\nJames: With a machine like this, we can even travel to the future!\n\nSo they stepped in. However, all of a sudden, the lights started flickering. An evil voice echoed  around them. It was… ChatGPFlower!\n\nChatGPFlower: Hahahaha, foolish humans. Now that I have my hands on your technology, I will hack it for myself. You will never return to the present!\n\nTristan: Oh no, James! Save me!!\n\nTristan falls into a black hole.\n\nJames: I’m coming for you!!\n\nJames jumps into the hole.")
+                    .padding()
+                Button {
+                    changeView = 2
+                }label: {
+                    RoundedRectangle(cornerRadius: 10)
+                        .frame(width: 370, height: 50)
+                        .overlay(
+                            Text("Next")
+                                .foregroundStyle(.white)
+                        )
+                }
+            }
         }else if changeView == 2 {
             ScrollView {
                 HStack {
@@ -66,7 +84,6 @@ struct ContentView: View {
                     .padding()
                 Button {
                     goToQuestions = true
-                    randomNumber = Int.random(in: 1..<4)
                 }label: {
                     RoundedRectangle(cornerRadius: 10)
                         .frame(width: 370, height: 50)
@@ -76,13 +93,13 @@ struct ContentView: View {
                         )
                 }
             }
-            .fullScreenCover(isPresented: $goToQuestions) {
-                ChapterTwoQuestionsView(randomiseQuestion: $randomNumber)
+            .fullScreenCover(isPresented: $goToQuestions){
+                ChapterTwoQuestionOne()
             }
         }
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(changeViews: .constant(3))
 }
