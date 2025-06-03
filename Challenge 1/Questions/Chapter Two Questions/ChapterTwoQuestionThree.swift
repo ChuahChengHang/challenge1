@@ -179,7 +179,7 @@ struct ChapterTwoQuestionThree: View {
             print(optionOrder)
         }
         .fullScreenCover(isPresented: $changeToLore) {
-            ContentView(changeViews: $changeViewsForContentView)
+            ContentView(changeViews: $changeViewsForContentView, progress: $progress)
         }
     }
 }
