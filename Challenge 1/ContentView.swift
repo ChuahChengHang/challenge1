@@ -88,6 +88,7 @@ struct ContentView: View {
                         .padding()
                 }else if progress == 100 {
                     Text("Congratulations! Tristan and James were managed to bring back to the present!")
+                        .padding()
                 }
             }
                 .onAppear {

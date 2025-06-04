@@ -145,6 +145,9 @@ struct ChapterThreeQuestionTwo: View {
                             .foregroundStyle(.white)
                     )
             }
+            .fullScreenCover(isPresented: $changeToContentView) {
+                ContentView(changeViews: $changeViewsInContentView, progress: $progress)
+            }
             Spacer()
         }else if changeView == 2 {
             Text("Wrong! 'Blur' means he is not focusing in class and 'sabo' is sabotage in a short form. 'Hen jialat' means very terrible!")
